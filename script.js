@@ -19,23 +19,35 @@ const scoreValue = document.querySelector("[data-score]");
 const scoreLabel = document.querySelector("[data-score-label]");
 const scoreProgress = document.querySelector("[data-score-progress]");
 const messageText = document.querySelector("[data-message]");
-const duaText = document.querySelector("[data-dua]");
-const copyFeedback = document.querySelector("[data-copy-feedback]");
+const duaNames = document.querySelector("[data-dua-names]");
+const duaWords = document.querySelector("[data-dua-text]");
+const toast = document.querySelector("[data-toast]");
+const duaButton = document.querySelector('[data-action="dua"]');
+const backButton = document.querySelector('[data-action="back"]');
+const copyDuaButton = document.querySelector('[data-action="copy-dua"]');
+const shareButton = document.querySelector('[data-action="share"]');
+const copyResultButton = document.querySelector('[data-action="copy-result"]');
+const quoteText = document.querySelector("[data-quote-text]");
+const quoteButton = document.querySelector('[data-action="quote"]');
 const editButton = document.querySelector('[data-action="edit"]');
 const againButton = document.querySelector('[data-action="again"]');
-const copyButton = document.querySelector('[data-action="copy"]');
 
 const state = {
   first: "",
   second: "",
+  result: null,
   dua: ""
 };
 
 let transitionTimer;
 let readingTimer;
 let scoreFrame;
-let copyFeedbackTimer;
+let toastTimer;
 let readingStepTimers = [];
+let currentQuote = "";
+let currentDua = "";
+const quoteHistory = [];
+const duaHistory = [];
 
 const readingMessages = [
   "Connecting two hearts...",
@@ -51,39 +63,73 @@ const readingSteps = [
   { at: 2800, count: "♡", message: readingMessages[3], progress: 100, burst: true }
 ];
 
+const romanticQuotes = [
+  "Some hearts feel like home, even from miles away.",
+  "Duaon mein yaad rakhna bhi mohabbat ki khoobsurat baat hai.",
+  "May your smiles always find their way back to each other.",
+  "Kuch log dil ko sukoon dene ke liye milte hain.",
+  "The sweetest love is the one that brings peace to your heart.",
+  "Aapki yaad dil ko chhoti si roshni si lagti hai.",
+  "Love grows quietly, in patience, in kindness, in the little things you do.",
+  "Thori si baat, thora sa dhyaan, aur dil ke andar ek naya sa khel.",
+  "May your conversations always feel like a soft place to land.",
+  "Sath chalne wale log kam milte hain, unhe hamesha yaad rakhna.",
+  "A gentle love is not loud; it simply stays.",
+  "Dil ka sukoon kisi ke saath mil jaye to usay sab se badi baat samjho.",
+  "May every small kindness between you become a reason to smile.",
+  "Mushkil dinon mein bhi ek dusre ka saath sab se bari baat hai.",
+  "Some bonds are not rushed; they bloom in their own gentle time.",
+  "Aankhon se nahi, dil se dekhne wali mohabbat sab se gehri hoti hai.",
+  "May your days hold more laughter than worries, and more closeness than distance.",
+  "Pyar wo nahi jo sirf kaha jaye, pyar wo hai jo amal mein dikhe.",
+  "A single kind word can make a whole heart feel lighter.",
+  "Dua karo ke rishta imaandari, sabr aur muhabbat se bara kare."
+];
+
 const outcomes = [
   {
-    min: 92,
+    min: 90,
     label: "Written in the stars",
-    message: (first, second) =>
-      `${first} and ${second}, the universe seems to smile a little wider when your names are together. Hold onto that magic, and water it with kindness every single day.`,
+    message: "Two hearts, one beautiful destiny. May your story be full of love. 💞",
     dua:
       "May Allah bless your bond with endless mercy, protect your hearts from every storm, and make your love a source of peace for one another. Ameen."
   },
   {
-    min: 82,
+    min: 80,
     label: "A beautiful connection",
-    message: (first, second) =>
-      `${first}, there is something soft and certain about the way your heart leans toward ${second}. This feels like the beginning of a beautifully written forever.`,
+    message: "A lovely connection with lots of beautiful moments ahead. 🌷",
     dua:
       "May Allah fill your days with gentle surprises, forgive every small misunderstanding, and keep your hearts softly tied together. Ameen."
   },
   {
-    min: 72,
+    min: 70,
     label: "Sweet and growing",
-    message: (first, second) =>
-      `${first} and ${second}, your love has a sweet rhythm all its own. Keep laughing, keep choosing each other, and let the little moments bloom.`,
+    message: "A sweet little bond that deserves care and kindness. 💗",
     dua:
       "May Allah guide your steps toward kindness, give you patience in every season, and make this love grow deeper with every passing day. Ameen."
   },
   {
-    min: 62,
+    min: 60,
     label: "A lovely beginning",
-    message: (first, second) =>
-      `${first}, something lovely is stirring between you and ${second}. Give it patience, give it tenderness, and let love grow in its own beautiful time.`,
+    message: "Every beautiful story begins with a little spark. ✨",
     dua:
       "May Allah place barakah in this beginning, guard your hearts, and turn every little moment you share into a reason to smile. Ameen."
   }
+];
+
+const duas = [
+  "Ya Allah, if this bond is good for them, unite their hearts in kindness and make their love a source of peace. Ameen.",
+  "Ya Allah, guide them to speak gently, listen patiently, and choose each other with a sincere heart. Ameen.",
+  "May Allah fill their days with barakah, their home with laughter, and their hearts with lasting tranquillity. Ameen.",
+  "Ya Allah, protect them from pride and misunderstanding; replace it with forgiveness, mercy, and understanding. Ameen.",
+  "May Allah make their love halal, pure, and steady, and bless every step they take toward one another. Ameen.",
+  "Ya Allah, give them courage to be honest and wisdom to be gentle, so their bond grows in goodness. Ameen.",
+  "May Allah keep their hearts safe in every storm and give them patience when the road feels difficult. Ameen.",
+  "Ya Allah, let their care for one another be a means of closeness to You, not a source of harm. Ameen.",
+  "May Allah bless them with a future built on trust, kindness, and shared dreams that please Him. Ameen.",
+  "Ya Allah, if this love is meant to bloom, water it with mercy and surround it with goodness. Ameen.",
+  "May Allah grant them contentment in each other's company and strength to choose what is right. Ameen.",
+  "Ya Allah, make their story one of forgiveness, faith, and gentle love that brings peace to all around them. Ameen."
 ];
 
 function randomBetween(min, max) {
@@ -185,13 +231,13 @@ function hashNames(first, second) {
 }
 
 function buildResult(first, second) {
-  const score = 62 + (hashNames(first, second) % 38);
+  const score = 60 + (hashNames(first, second) % 41);
   const outcome = outcomes.find((item) => score >= item.min);
 
   return {
     score,
     label: outcome.label,
-    message: outcome.message(first, second),
+    message: outcome.message,
     dua: outcome.dua
   };
 }
@@ -238,6 +284,7 @@ function showScreen(name, onShown) {
 function animateScore(score) {
   if (scoreFrame) window.cancelAnimationFrame(scoreFrame);
   scoreProgress.style.strokeDashoffset = String(100 - score);
+  restartAnimation(scoreValue, "is-counting");
 
   if (reducedMotionQuery.matches) {
     scoreValue.textContent = String(score);
@@ -260,16 +307,55 @@ function animateScore(score) {
   scoreFrame = window.requestAnimationFrame(tick);
 }
 
+function setRandomQuote() {
+  const freshQuotes = romanticQuotes.filter((quote) => quote !== currentQuote && !quoteHistory.includes(quote));
+  const pool = freshQuotes.length ? freshQuotes : romanticQuotes.filter((quote) => quote !== currentQuote);
+
+  currentQuote = pick(pool);
+  quoteHistory.push(currentQuote);
+
+  if (quoteHistory.length > romanticQuotes.length - 1) {
+    quoteHistory.shift();
+  }
+
+  quoteText.textContent = currentQuote;
+  restartAnimation(quoteText, "is-changing");
+}
+
+function chooseDua() {
+  const freshDuas = duas.filter((dua) => dua !== currentDua && !duaHistory.includes(dua));
+  const pool = freshDuas.length ? freshDuas : duas.filter((dua) => dua !== currentDua);
+  currentDua = pick(pool);
+  duaHistory.push(currentDua);
+
+  if (duaHistory.length > duas.length - 1) {
+    duaHistory.shift();
+  }
+
+  return currentDua;
+}
+
+function openDuaScreen() {
+  if (!state.first || !state.second) return;
+
+  const dua = chooseDua();
+  state.dua = dua;
+  duaNames.textContent = `${state.first} ♡ ${state.second}`;
+  duaWords.textContent = dua;
+
+  showScreen("dua", () => restartAnimation(duaWords, "is-changing"));
+}
+
 function fillResult(result, first, second) {
   nameOne.textContent = first;
   nameTwo.textContent = second;
   scoreLabel.textContent = result.label;
   messageText.textContent = result.message;
-  duaText.textContent = result.dua;
   scoreValue.textContent = "0";
+  scoreValue.classList.remove("is-counting");
   scoreProgress.style.strokeDashoffset = "100";
-  copyFeedback.textContent = "";
-  state.dua = result.dua;
+  state.result = result;
+  setRandomQuote();
 }
 
 function clearReadingSequence() {
@@ -383,12 +469,31 @@ function copyWithFallback(text) {
   if (!copied) throw new Error("Copy failed");
 }
 
-function showCopyFeedback(text) {
-  window.clearTimeout(copyFeedbackTimer);
-  copyFeedback.textContent = text;
-  copyFeedbackTimer = window.setTimeout(() => {
-    copyFeedback.textContent = "";
+function showToast(message) {
+  window.clearTimeout(toastTimer);
+  toast.textContent = message;
+  restartAnimation(toast, "is-visible");
+  toastTimer = window.setTimeout(() => {
+    toast.classList.remove("is-visible");
+    toast.textContent = "";
   }, 2400);
+}
+
+async function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) {
+    await navigator.clipboard.writeText(text);
+  } else {
+    copyWithFallback(text);
+  }
+}
+
+function buildShareText() {
+  if (!state.first || !state.second || !state.result) return "";
+
+  const { score, label, message } = state.result;
+  const quoteLine = currentQuote ? `\n\n"${currentQuote}"` : "";
+
+  return `💌 ${state.first} ♡ ${state.second}\n\n${score}% — ${label}\n${message}${quoteLine}\n\nJust for fun, not a prediction.\nQalb — Two Hearts, One Dua`;
 }
 
 async function copyDua() {
@@ -397,15 +502,49 @@ async function copyDua() {
   const text = `${state.first} ♡ ${state.second}\n\n${state.dua}`;
 
   try {
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(text);
-    } else {
-      copyWithFallback(text);
-    }
-
-    showCopyFeedback("Dua copied ♡");
+    await copyText(text);
+    showToast("Copied with love! 💗");
   } catch {
-    showCopyFeedback("Couldn't copy it. You can select the dua instead.");
+    showToast("Couldn't copy it. You can select the dua instead.");
+  }
+}
+
+async function copyResult() {
+  const text = buildShareText();
+  if (!text) return;
+
+  try {
+    await copyText(text);
+    showToast("Copied with love! 💗");
+  } catch {
+    showToast("Couldn't copy it. Please try again.");
+  }
+}
+
+async function shareResult() {
+  const text = buildShareText();
+  if (!text) return;
+
+  const shareData = {
+    title: "Qalb – Two Hearts, One Dua",
+    text,
+    url: window.location.href
+  };
+
+  if (navigator.share) {
+    try {
+      await navigator.share(shareData);
+      return;
+    } catch (error) {
+      if (error && error.name === "AbortError") return;
+    }
+  }
+
+  try {
+    await copyText(text);
+    showToast("Copied with love! 💗");
+  } catch {
+    showToast("Couldn't share it. Please try again.");
   }
 }
 
@@ -453,13 +592,26 @@ againButton.addEventListener("click", () => {
   beginReading(state.first, state.second);
 });
 
+duaButton.addEventListener("click", openDuaScreen);
+backButton.addEventListener("click", () => showScreen("result"));
+copyDuaButton.addEventListener("click", copyDua);
+shareButton.addEventListener("click", shareResult);
+copyResultButton.addEventListener("click", copyResult);
+quoteButton.addEventListener("click", setRandomQuote);
 editButton.addEventListener("click", restoreWelcome);
-copyButton.addEventListener("click", copyDua);
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape" && form.closest(".screen").classList.contains("is-active") === false) {
-    restoreWelcome();
+  if (event.key !== "Escape") return;
+
+  const activeScreen = screens.find((screen) => screen.classList.contains("is-active"));
+  if (!activeScreen || activeScreen.dataset.screen === "welcome") return;
+
+  if (activeScreen.dataset.screen === "dua") {
+    showScreen("result");
+    return;
   }
+
+  restoreWelcome();
 });
 
 createAmbientParticles();

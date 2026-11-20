@@ -237,6 +237,16 @@
         <div class="result-card">
           <div class="result-glow" aria-hidden="true"></div>
 
+          <div class="result-decor" aria-hidden="true">
+            <span class="result-decor__heart result-decor__heart--one">♥</span>
+            <span class="result-decor__heart result-decor__heart--two">♡</span>
+            <span class="result-decor__heart result-decor__heart--three">♥</span>
+            <span class="result-decor__star result-decor__star--one">✦</span>
+            <span class="result-decor__star result-decor__star--two">✧</span>
+            <span class="result-decor__petal result-decor__petal--one"></span>
+            <span class="result-decor__petal result-decor__petal--two"></span>
+          </div>
+
           <header class="result-header">
             <p class="eyebrow"><span aria-hidden="true">✦</span> The stars have spoken</p>
             <h2 class="result-title" id="result-title">Our Love Story</h2>
@@ -249,8 +259,8 @@
 
           <div class="result-body">
             <div class="score-panel">
-              <div class="score-ring-wrap">
-                <svg class="score-ring" viewBox="0 0 220 220" aria-hidden="true">
+              <div class="score-heart-wrap">
+                <svg class="score-heart" viewBox="0 0 220 200" aria-hidden="true">
                   <defs>
                     <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
                       <stop offset="0%" stop-color="#ffb6c1" />
@@ -258,13 +268,14 @@
                       <stop offset="100%" stop-color="#d6336c" />
                     </linearGradient>
                   </defs>
-                  <circle class="score-ring__track" cx="110" cy="110" r="92" />
-                  <circle
-                    class="score-ring__progress"
+                  <path
+                    class="score-heart__track"
+                    d="M110 182 C96 170 28 126 28 78 C28 46 52 24 82 24 C97 24 106 32 110 42 C114 32 123 24 138 24 C168 24 192 46 192 78 C192 126 124 170 110 182 Z"
+                  />
+                  <path
+                    class="score-heart__progress"
                     data-score-progress
-                    cx="110"
-                    cy="110"
-                    r="92"
+                    d="M110 182 C96 170 28 126 28 78 C28 46 52 24 82 24 C97 24 106 32 110 42 C114 32 123 24 138 24 C168 24 192 46 192 78 C192 126 124 170 110 182 Z"
                     pathLength="100"
                   />
                 </svg>
@@ -279,6 +290,7 @@
               </div>
 
               <p class="score-label" data-score-label></p>
+              <p class="score-disclaimer">For entertainment only — not a real compatibility prediction.</p>
             </div>
 
             <div class="message-panel">
@@ -289,26 +301,36 @@
                 <span></span>♡<span></span>
               </div>
 
-              <div class="dua-card">
-                <p class="dua-kicker">Your Dua</p>
-                <p class="dua-text" data-dua></p>
+              <div class="quote-card">
+                <span class="quote-card__heart quote-card__heart--one" aria-hidden="true">♡</span>
+                <span class="quote-card__heart quote-card__heart--two" aria-hidden="true">♥</span>
+                <p class="quote-kicker">a whisper for your heart</p>
+                <blockquote class="quote-text" data-quote-text aria-live="polite"></blockquote>
+                <button class="quote-button" type="button" data-action="quote">
+                  Another Sweet Message 💌
+                </button>
               </div>
+
             </div>
           </div>
 
           <div class="result-actions">
-            <button class="action-button action-button--primary" type="button" data-action="again">
-              Try Again 💕
+            <button class="action-button action-button--primary" type="button" data-action="dua">
+              Read Our Dua 🤲
             </button>
-            <button class="action-button action-button--secondary" type="button" data-action="edit">
-              Edit Names
+            <button class="action-button action-button--secondary" type="button" data-action="again">
+              Try Again ↻
             </button>
-            <button class="action-button action-button--quiet" type="button" data-action="copy">
-              Copy Dua
+            <button class="action-button action-button--secondary" type="button" data-action="share">
+              Share Our Result 💌
             </button>
           </div>
 
-          <p class="copy-feedback" data-copy-feedback role="status" aria-live="polite"></p>
+          <div class="result-utility">
+            <button class="utility-button" type="button" data-action="edit">Edit Names</button>
+            <span aria-hidden="true">♡</span>
+            <button class="utility-button" type="button" data-action="copy-result">Copy Result</button>
+          </div>
         </div>
 
         <footer class="site-footer">
@@ -317,7 +339,100 @@
           <span aria-hidden="true">♡</span>
         </footer>
       </section>
+
+      <section class="screen dua-screen" data-screen="dua" aria-labelledby="dua-title" tabindex="-1">
+        <div class="dua-scene">
+          <div class="dua-sky" aria-hidden="true">
+            <span class="dua-star dua-star--one">✦</span>
+            <span class="dua-star dua-star--two">✧</span>
+            <span class="dua-star dua-star--three">✦</span>
+            <span class="dua-star dua-star--four">✶</span>
+            <span class="dua-star dua-star--five">✦</span>
+            <span class="dua-sparkle dua-sparkle--one">✧</span>
+            <span class="dua-sparkle dua-sparkle--two">✦</span>
+
+            <svg class="crescent-moon" viewBox="0 0 120 120">
+              <defs>
+                <filter id="moonGlow" x="-80%" y="-80%" width="260%" height="260%">
+                  <feGaussianBlur stdDeviation="7" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+                <mask id="crescentMask">
+                  <rect width="120" height="120" fill="#fff" />
+                  <circle cx="76" cy="40" r="45" fill="#000" />
+                </mask>
+              </defs>
+              <circle
+                cx="56"
+                cy="60"
+                r="44"
+                fill="#ffe9a8"
+                mask="url(#crescentMask)"
+                filter="url(#moonGlow)"
+              />
+            </svg>
+
+            <svg class="rose-spray rose-spray--left" viewBox="0 0 90 110">
+              <path d="M45 106 Q43 70 54 38" fill="none" stroke="#6f9b72" stroke-width="3" stroke-linecap="round" />
+              <path d="M47 76 Q24 67 20 48 Q41 51 47 76Z" fill="#8fbe8d" opacity="0.9" />
+              <path d="M50 63 Q72 57 75 40 Q56 42 50 63Z" fill="#7fae82" opacity="0.9" />
+              <g transform="translate(54 30)">
+                <circle r="17" fill="#c93669" />
+                <path d="M0 -15 Q14 -12 12 0 Q8 12 0 15 Q-8 12 -12 0 Q-14 -12 0 -15Z" fill="#ff4081" />
+                <circle r="7" fill="#ffb6c1" />
+              </g>
+              <g transform="translate(22 51) scale(0.62)">
+                <circle r="16" fill="#d6336c" />
+                <circle r="8" fill="#ffb6c1" />
+              </g>
+            </svg>
+
+            <svg class="rose-spray rose-spray--right" viewBox="0 0 90 110">
+              <path d="M45 106 Q47 70 36 38" fill="none" stroke="#6f9b72" stroke-width="3" stroke-linecap="round" />
+              <path d="M43 76 Q66 67 70 48 Q49 51 43 76Z" fill="#8fbe8d" opacity="0.9" />
+              <path d="M40 63 Q18 57 15 40 Q34 42 40 63Z" fill="#7fae82" opacity="0.9" />
+              <g transform="translate(36 30)">
+                <circle r="17" fill="#c93669" />
+                <path d="M0 -15 Q14 -12 12 0 Q8 12 0 15 Q-8 12 -12 0 Q-14 -12 0 -15Z" fill="#ff4081" />
+                <circle r="7" fill="#ffb6c1" />
+              </g>
+              <g transform="translate(68 51) scale(0.62)">
+                <circle r="16" fill="#d6336c" />
+                <circle r="8" fill="#ffb6c1" />
+              </g>
+            </svg>
+          </div>
+
+          <article class="dua-card-main">
+            <div class="dua-ornament" aria-hidden="true"><span></span>✦<span></span></div>
+            <p class="eyebrow">a gentle prayer for you both</p>
+            <h2 class="dua-title" id="dua-title">A Little Dua</h2>
+            <p class="dua-names" data-dua-names></p>
+
+            <div class="dua-divider" aria-hidden="true">
+              <span></span><i></i><span></span>
+            </div>
+
+            <blockquote class="dua-words" data-dua-text aria-live="polite"></blockquote>
+            <p class="dua-note">A prayer for goodness, peace, and what is best for both hearts.</p>
+
+            <div class="dua-actions">
+              <button class="action-button action-button--primary" type="button" data-action="copy-dua">
+                Copy Dua
+              </button>
+              <button class="action-button action-button--secondary" type="button" data-action="back">
+                Back to Result
+              </button>
+            </div>
+          </article>
+        </div>
+      </section>
     </main>
+
+    <div class="toast" data-toast role="status" aria-live="polite" aria-atomic="true"></div>
 
     <script src="script.js"></script>
   </body>
