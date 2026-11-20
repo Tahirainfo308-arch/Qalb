@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f8dce4" />
+    <meta
+      name="description"
+      content="Qalb – Two Hearts, One Dua. A dreamy romantic love calculator for two names and one beautiful story."
+    />
+    <title>Qalb ♡ — Two Hearts, One Dua</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <div class="ambient" aria-hidden="true">
+      <div class="ambient__wash"></div>
+      <div class="ambient__orb ambient__orb--rose"></div>
+      <div class="ambient__orb ambient__orb--blush"></div>
+      <div class="ambient__orb ambient__orb--cream"></div>
+      <div class="ambient__particles" data-particles></div>
+      <div class="ambient__vignette"></div>
+    </div>
+
+    <main class="app">
+      <section class="screen welcome-screen is-active" data-screen="welcome">
+        <div class="welcome-card">
+          <div class="illustration-panel">
+            <div class="illustration-halo"></div>
+            <div class="illustration-orbit illustration-orbit--one"></div>
+            <div class="illustration-orbit illustration-orbit--two"></div>
+
+            <svg
+              class="teddy-art"
+              viewBox="0 0 280 270"
+              role="img"
+              aria-label="A cute teddy bear holding a glowing pink heart"
+            >
+              <defs>
+                <radialGradient id="fur" cx="35%" cy="25%" r="80%">
+                  <stop offset="0%" stop-color="#d9a77d" />
+                  <stop offset="55%" stop-color="#bd835e" />
+                  <stop offset="100%" stop-color="#9d6648" />
+                </radialGradient>
+                <radialGradient id="innerEar" cx="50%" cy="40%" r="65%">
+                  <stop offset="0%" stop-color="#f4b9ad" />
+                  <stop offset="100%" stop-color="#d98b8c" />
+                </radialGradient>
+                <radialGradient id="heartFill" cx="32%" cy="24%" r="78%">
+                  <stop offset="0%" stop-color="#ffd5e1" />
+                  <stop offset="48%" stop-color="#f06f9b" />
+                  <stop offset="100%" stop-color="#b92f64" />
+                </radialGradient>
+                <radialGradient id="cheek" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#ef7e93" stop-opacity="0.75" />
+                  <stop offset="100%" stop-color="#ef7e93" stop-opacity="0" />
+                </radialGradient>
+                <filter id="softShadow" x="-35%" y="-35%" width="170%" height="180%">
+                  <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#5d1733" flood-opacity="0.22" />
+                </filter>
+                <filter id="heartGlow" x="-80%" y="-80%" width="260%" height="260%">
+                  <feGaussianBlur stdDeviation="8" result="blur" />
+                  <feMerge>
+                    <feMergeNode in="blur" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
+                </filter>
+              </defs>
+
+              <ellipse cx="140" cy="244" rx="83" ry="13" fill="#67304c" opacity="0.14" />
+
+              <g filter="url(#softShadow)">
+                <ellipse cx="75" cy="79" rx="30" ry="32" fill="url(#fur)" />
+                <ellipse cx="205" cy="79" rx="30" ry="32" fill="url(#fur)" />
+                <ellipse cx="75" cy="79" rx="17" ry="19" fill="url(#innerEar)" opacity="0.82" />
+                <ellipse cx="205" cy="79" rx="17" ry="19" fill="url(#innerEar)" opacity="0.82" />
+
+                <ellipse cx="88" cy="220" rx="31" ry="20" fill="url(#fur)" transform="rotate(-13 88 220)" />
+                <ellipse cx="192" cy="220" rx="31" ry="20" fill="url(#fur)" transform="rotate(13 192 220)" />
+
+                <ellipse cx="140" cy="167" rx="70" ry="66" fill="url(#fur)" />
+                <ellipse cx="140" cy="99" rx="78" ry="68" fill="url(#fur)" />
+
+                <ellipse cx="140" cy="122" rx="39" ry="29" fill="#f0d3b6" opacity="0.95" />
+                <circle cx="108" cy="120" r="17" fill="url(#cheek)" />
+                <circle cx="172" cy="120" r="17" fill="url(#cheek)" />
+
+                <ellipse cx="113" cy="93" rx="7" ry="8" fill="#40202b" />
+                <ellipse cx="167" cy="93" rx="7" ry="8" fill="#40202b" />
+                <circle cx="115" cy="90" r="2.4" fill="#fff8f3" opacity="0.9" />
+                <circle cx="169" cy="90" r="2.4" fill="#fff8f3" opacity="0.9" />
+
+                <path d="M132 113 Q140 107 148 113 Q146 121 140 123 Q134 121 132 113Z" fill="#5c2b37" />
+                <path d="M140 123 Q140 132 130 134" fill="none" stroke="#5c2b37" stroke-width="2.6" stroke-linecap="round" />
+                <path d="M140 123 Q140 132 150 134" fill="none" stroke="#5c2b37" stroke-width="2.6" stroke-linecap="round" />
+                <path d="M123 143 Q140 154 157 143" fill="none" stroke="#73433f" stroke-width="2.4" stroke-linecap="round" opacity="0.7" />
+
+                <path d="M91 150 Q63 171 82 201 Q99 216 118 196" fill="none" stroke="#a96f50" stroke-width="23" stroke-linecap="round" />
+                <path d="M189 150 Q217 171 198 201 Q181 216 162 196" fill="none" stroke="#a96f50" stroke-width="23" stroke-linecap="round" />
+
+                <path
+                  class="teddy-heart"
+                  d="M140 198 C131 188 112 178 111 161 C110 148 120 139 131 141 C136 142 139 145 140 148 C142 145 146 142 151 141 C163 139 173 148 171 162 C169 179 149 188 140 198Z"
+                  fill="url(#heartFill)"
+                  filter="url(#heartGlow)"
+                />
+                <path d="M126 153 Q123 158 126 163" fill="none" stroke="#ffe8ef" stroke-width="4" stroke-linecap="round" opacity="0.72" />
+              </g>
+
+              <g fill="#f4a7bd" class="teddy-twinkles">
+                <path d="M54 131 L58 142 L69 146 L58 150 L54 161 L50 150 L39 146 L50 142Z" opacity="0.9" />
+                <path d="M226 126 L229 134 L237 137 L229 140 L226 148 L223 140 L215 137 L223 134Z" opacity="0.75" />
+                <circle cx="63" cy="191" r="3" opacity="0.7" />
+                <circle cx="220" cy="184" r="2.4" opacity="0.7" />
+              </g>
+            </svg>
+
+            <p class="illustration-note">a little love, a little dua</p>
+          </div>
+
+          <div class="content-panel">
+            <div class="eyebrow"><span aria-hidden="true">✦</span> A romantic little journey</div>
+
+            <header class="hero-copy">
+              <h1 class="title">Qalb <span aria-hidden="true">♡</span></h1>
+              <p class="subtitle">Two Hearts, One Dua</p>
+              <p class="tagline">Two names, one beautiful story. Let's see what the stars say...</p>
+            </header>
+
+            <form class="love-form" id="love-form" novalidate>
+              <div class="field-group">
+                <label class="sr-only" for="first-name">Enter your name</label>
+                <div class="input-shell">
+                  <span class="input-icon" aria-hidden="true">♡</span>
+                  <input
+                    id="first-name"
+                    name="firstName"
+                    type="text"
+                    placeholder="Enter your name"
+                    autocomplete="given-name"
+                    minlength="2"
+                    maxlength="24"
+                    required
+                  />
+                  <span class="input-shine" aria-hidden="true"></span>
+                  <span class="typing-heart" aria-hidden="true">♡</span>
+                </div>
+              </div>
+
+              <div class="field-group">
+                <label class="sr-only" for="second-name">Enter your lover’s name</label>
+                <div class="input-shell">
+                  <span class="input-icon" aria-hidden="true">✧</span>
+                  <input
+                    id="second-name"
+                    name="secondName"
+                    type="text"
+                    placeholder="Enter your lover’s name"
+                    autocomplete="off"
+                    minlength="2"
+                    maxlength="24"
+                    required
+                  />
+                  <span class="input-shine" aria-hidden="true"></span>
+                  <span class="typing-heart" aria-hidden="true">♡</span>
+                </div>
+              </div>
+
+              <p class="form-message" data-form-message role="status" aria-live="polite"></p>
+
+              <button class="love-button" type="submit">
+                <span class="love-button__glow" aria-hidden="true"></span>
+                <span class="love-button__label">Calculate Our Love 💗</span>
+              </button>
+            </form>
+
+            <div class="trust-note">
+              <span class="trust-note__line" aria-hidden="true"></span>
+              <span>written in the stars</span>
+              <span class="trust-note__line" aria-hidden="true"></span>
+            </div>
+          </div>
+        </div>
+
+        <footer class="site-footer">
+          <span aria-hidden="true">♡</span>
+          <p>Made with love &amp; duas</p>
+          <span aria-hidden="true">♡</span>
+        </footer>
+      </section>
+
+      <section class="screen reading-screen" data-screen="reading" aria-label="Reading the stars" tabindex="-1">
+        <div class="reading-card">
+          <div class="reading-sky" aria-hidden="true">
+            <span class="reading-sky__star reading-sky__star--one">✦</span>
+            <span class="reading-sky__star reading-sky__star--two">✧</span>
+            <span class="reading-sky__star reading-sky__star--three">✦</span>
+            <span class="reading-sky__star reading-sky__star--four">✶</span>
+            <span class="reading-sky__petal reading-sky__petal--one"></span>
+            <span class="reading-sky__petal reading-sky__petal--two"></span>
+            <span class="reading-sky__petal reading-sky__petal--three"></span>
+          </div>
+
+          <p class="reading-kicker">a little magic is brewing</p>
+          <h2 class="reading-title">Reading the stars...</h2>
+          <p class="reading-names" data-reading-names></p>
+
+          <div class="reading-heart-stage" data-heart-stage aria-hidden="true">
+            <span class="reading-orbit-ring reading-orbit-ring--one"></span>
+            <span class="reading-orbit-ring reading-orbit-ring--two"></span>
+            <span class="reading-countdown" data-countdown>3</span>
+            <span class="reading-trail reading-trail--left"></span>
+            <span class="reading-trail reading-trail--right"></span>
+            <span class="love-heart love-heart--left">♥</span>
+            <span class="love-heart love-heart--right">♥</span>
+            <span class="heart-burst" data-heart-burst></span>
+          </div>
+
+          <div class="reading-message-wrap" aria-live="polite">
+            <p class="reading-message" data-reading-message>Connecting two hearts...</p>
+          </div>
+
+          <div class="reading-progress" aria-hidden="true">
+            <span data-reading-progress></span>
+          </div>
+        </div>
+      </section>
+
+      <section class="screen result-screen" data-screen="result" aria-labelledby="result-title" tabindex="-1">
+        <div class="result-card">
+          <div class="result-glow" aria-hidden="true"></div>
+
+          <header class="result-header">
+            <p class="eyebrow"><span aria-hidden="true">✦</span> The stars have spoken</p>
+            <h2 class="result-title" id="result-title">Our Love Story</h2>
+            <div class="couple-names">
+              <span data-name-one></span>
+              <span class="couple-names__heart" aria-hidden="true">♡</span>
+              <span data-name-two></span>
+            </div>
+          </header>
+
+          <div class="result-body">
+            <div class="score-panel">
+              <div class="score-ring-wrap">
+                <svg class="score-ring" viewBox="0 0 220 220" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#ffb6c1" />
+                      <stop offset="52%" stop-color="#ff4081" />
+                      <stop offset="100%" stop-color="#d6336c" />
+                    </linearGradient>
+                  </defs>
+                  <circle class="score-ring__track" cx="110" cy="110" r="92" />
+                  <circle
+                    class="score-ring__progress"
+                    data-score-progress
+                    cx="110"
+                    cy="110"
+                    r="92"
+                    pathLength="100"
+                  />
+                </svg>
+
+                <div class="score-value">
+                  <span data-score>0</span><small>%</small>
+                </div>
+
+                <span class="score-float score-float--one" aria-hidden="true">♥</span>
+                <span class="score-float score-float--two" aria-hidden="true">✦</span>
+                <span class="score-float score-float--three" aria-hidden="true">♡</span>
+              </div>
+
+              <p class="score-label" data-score-label></p>
+            </div>
+
+            <div class="message-panel">
+              <p class="panel-label">a little note for you both</p>
+              <p class="love-message" data-message></p>
+
+              <div class="message-divider" aria-hidden="true">
+                <span></span>♡<span></span>
+              </div>
+
+              <div class="dua-card">
+                <p class="dua-kicker">Your Dua</p>
+                <p class="dua-text" data-dua></p>
+              </div>
+            </div>
+          </div>
+
+          <div class="result-actions">
+            <button class="action-button action-button--primary" type="button" data-action="again">
+              Try Again 💕
+            </button>
+            <button class="action-button action-button--secondary" type="button" data-action="edit">
+              Edit Names
+            </button>
+            <button class="action-button action-button--quiet" type="button" data-action="copy">
+              Copy Dua
+            </button>
+          </div>
+
+          <p class="copy-feedback" data-copy-feedback role="status" aria-live="polite"></p>
+        </div>
+
+        <footer class="site-footer">
+          <span aria-hidden="true">♡</span>
+          <p>Made with love &amp; duas</p>
+          <span aria-hidden="true">♡</span>
+        </footer>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
