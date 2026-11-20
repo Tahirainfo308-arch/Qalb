@@ -26,6 +26,7 @@
       <div class="ambient__orb ambient__orb--blush"></div>
       <div class="ambient__orb ambient__orb--cream"></div>
       <div class="ambient__particles" data-particles></div>
+      <div class="ambient__sparkles"></div>
       <div class="ambient__vignette"></div>
     </div>
 
@@ -37,90 +38,19 @@
             <div class="illustration-orbit illustration-orbit--one"></div>
             <div class="illustration-orbit illustration-orbit--two"></div>
 
-            <svg
-              class="teddy-art"
-              viewBox="0 0 280 270"
-              role="img"
-              aria-label="A cute teddy bear holding a glowing pink heart"
-            >
-              <defs>
-                <radialGradient id="fur" cx="35%" cy="25%" r="80%">
-                  <stop offset="0%" stop-color="#d9a77d" />
-                  <stop offset="55%" stop-color="#bd835e" />
-                  <stop offset="100%" stop-color="#9d6648" />
-                </radialGradient>
-                <radialGradient id="innerEar" cx="50%" cy="40%" r="65%">
-                  <stop offset="0%" stop-color="#f4b9ad" />
-                  <stop offset="100%" stop-color="#d98b8c" />
-                </radialGradient>
-                <radialGradient id="heartFill" cx="32%" cy="24%" r="78%">
-                  <stop offset="0%" stop-color="#ffd5e1" />
-                  <stop offset="48%" stop-color="#f06f9b" />
-                  <stop offset="100%" stop-color="#b92f64" />
-                </radialGradient>
-                <radialGradient id="cheek" cx="50%" cy="50%" r="50%">
-                  <stop offset="0%" stop-color="#ef7e93" stop-opacity="0.75" />
-                  <stop offset="100%" stop-color="#ef7e93" stop-opacity="0" />
-                </radialGradient>
-                <filter id="softShadow" x="-35%" y="-35%" width="170%" height="180%">
-                  <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="#5d1733" flood-opacity="0.22" />
-                </filter>
-                <filter id="heartGlow" x="-80%" y="-80%" width="260%" height="260%">
-                  <feGaussianBlur stdDeviation="8" result="blur" />
-                  <feMerge>
-                    <feMergeNode in="blur" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
+            <img
+              class="teddy-art bear-art"
+              src="img/bear.webp"
+              alt="A cute teddy bear holding a glowing pink heart"
+              width="1024"
+              height="1024"
+              decoding="async"
+              draggable="false"
+            />
 
-              <ellipse cx="140" cy="244" rx="83" ry="13" fill="#67304c" opacity="0.14" />
-
-              <g filter="url(#softShadow)">
-                <ellipse cx="75" cy="79" rx="30" ry="32" fill="url(#fur)" />
-                <ellipse cx="205" cy="79" rx="30" ry="32" fill="url(#fur)" />
-                <ellipse cx="75" cy="79" rx="17" ry="19" fill="url(#innerEar)" opacity="0.82" />
-                <ellipse cx="205" cy="79" rx="17" ry="19" fill="url(#innerEar)" opacity="0.82" />
-
-                <ellipse cx="88" cy="220" rx="31" ry="20" fill="url(#fur)" transform="rotate(-13 88 220)" />
-                <ellipse cx="192" cy="220" rx="31" ry="20" fill="url(#fur)" transform="rotate(13 192 220)" />
-
-                <ellipse cx="140" cy="167" rx="70" ry="66" fill="url(#fur)" />
-                <ellipse cx="140" cy="99" rx="78" ry="68" fill="url(#fur)" />
-
-                <ellipse cx="140" cy="122" rx="39" ry="29" fill="#f0d3b6" opacity="0.95" />
-                <circle cx="108" cy="120" r="17" fill="url(#cheek)" />
-                <circle cx="172" cy="120" r="17" fill="url(#cheek)" />
-
-                <ellipse cx="113" cy="93" rx="7" ry="8" fill="#40202b" />
-                <ellipse cx="167" cy="93" rx="7" ry="8" fill="#40202b" />
-                <circle cx="115" cy="90" r="2.4" fill="#fff8f3" opacity="0.9" />
-                <circle cx="169" cy="90" r="2.4" fill="#fff8f3" opacity="0.9" />
-
-                <path d="M132 113 Q140 107 148 113 Q146 121 140 123 Q134 121 132 113Z" fill="#5c2b37" />
-                <path d="M140 123 Q140 132 130 134" fill="none" stroke="#5c2b37" stroke-width="2.6" stroke-linecap="round" />
-                <path d="M140 123 Q140 132 150 134" fill="none" stroke="#5c2b37" stroke-width="2.6" stroke-linecap="round" />
-                <path d="M123 143 Q140 154 157 143" fill="none" stroke="#73433f" stroke-width="2.4" stroke-linecap="round" opacity="0.7" />
-
-                <path d="M91 150 Q63 171 82 201 Q99 216 118 196" fill="none" stroke="#a96f50" stroke-width="23" stroke-linecap="round" />
-                <path d="M189 150 Q217 171 198 201 Q181 216 162 196" fill="none" stroke="#a96f50" stroke-width="23" stroke-linecap="round" />
-
-                <path
-                  class="teddy-heart"
-                  d="M140 198 C131 188 112 178 111 161 C110 148 120 139 131 141 C136 142 139 145 140 148 C142 145 146 142 151 141 C163 139 173 148 171 162 C169 179 149 188 140 198Z"
-                  fill="url(#heartFill)"
-                  filter="url(#heartGlow)"
-                />
-                <path d="M126 153 Q123 158 126 163" fill="none" stroke="#ffe8ef" stroke-width="4" stroke-linecap="round" opacity="0.72" />
-              </g>
-
-              <g fill="#f4a7bd" class="teddy-twinkles">
-                <path d="M54 131 L58 142 L69 146 L58 150 L54 161 L50 150 L39 146 L50 142Z" opacity="0.9" />
-                <path d="M226 126 L229 134 L237 137 L229 140 L226 148 L223 140 L215 137 L223 134Z" opacity="0.75" />
-                <circle cx="63" cy="191" r="3" opacity="0.7" />
-                <circle cx="220" cy="184" r="2.4" opacity="0.7" />
-              </g>
-            </svg>
+            <span class="bear-twinkle bear-twinkle--one" aria-hidden="true">✦</span>
+            <span class="bear-twinkle bear-twinkle--two" aria-hidden="true">✧</span>
+            <span class="bear-twinkle bear-twinkle--three" aria-hidden="true">♡</span>
 
             <p class="illustration-note">a little love, a little dua</p>
           </div>

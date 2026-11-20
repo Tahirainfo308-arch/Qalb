@@ -13,6 +13,7 @@
   --glass: rgba(255, 250, 246, 0.78);
   --line: rgba(166, 77, 111, 0.2);
   --shadow: 0 30px 80px rgba(88, 28, 56, 0.2), 0 8px 24px rgba(88, 28, 56, 0.1);
+  --button-art: url("img/button.jfif");
 }
 
 * {
@@ -115,6 +116,19 @@ button {
   inset: 0;
 }
 
+.ambient__sparkles {
+  position: absolute;
+  inset: -12%;
+  background-image:
+    radial-gradient(circle, rgba(255, 255, 255, 0.9) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(255, 255, 255, 0.72) 0 1px, transparent 1.5px),
+    radial-gradient(circle, rgba(255, 182, 193, 0.78) 0 1.2px, transparent 1.8px);
+  background-position: 0 0, 90px 60px, 150px 120px;
+  background-size: 220px 220px, 310px 310px, 260px 260px;
+  opacity: 0.42;
+  animation: sparkle-field 28s linear infinite;
+}
+
 .ambient-particle {
   position: absolute;
   display: block;
@@ -180,6 +194,8 @@ button {
   z-index: 1;
   display: grid;
   place-items: center;
+  width: 100%;
+  max-width: 100vw;
   min-height: 100vh;
   min-height: 100svh;
   padding: clamp(24px, 4vw, 54px) clamp(14px, 3vw, 32px) 28px;
@@ -188,7 +204,7 @@ button {
 .screen {
   display: none;
   width: 100%;
-  max-width: 1060px;
+  max-width: min(1060px, 100%);
 }
 
 .screen.is-active {
@@ -290,14 +306,42 @@ button {
   animation: teddy-float 6s ease-in-out infinite;
 }
 
-.teddy-heart {
-  transform-origin: 140px 170px;
-  animation: heart-beat 2.4s ease-in-out infinite;
+.bear-art {
+  display: block;
+  max-width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
 }
 
-.teddy-twinkles {
-  transform-origin: center;
+.bear-twinkle {
+  position: absolute;
+  color: var(--rose);
+  font-family: Georgia, serif;
+  line-height: 1;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.95);
   animation: star-twinkle 3.4s ease-in-out infinite;
+  pointer-events: none;
+}
+
+.bear-twinkle--one {
+  top: 20%;
+  left: 12%;
+  font-size: 20px;
+}
+
+.bear-twinkle--two {
+  top: 30%;
+  right: 10%;
+  font-size: 16px;
+  animation-delay: -1.2s;
+}
+
+.bear-twinkle--three {
+  right: 18%;
+  bottom: 18%;
+  font-size: 22px;
+  color: var(--rose-deep);
+  animation-delay: -2.2s;
 }
 
 .illustration-note {
@@ -509,7 +553,9 @@ button {
   overflow: hidden;
   border: 0;
   border-radius: 19px;
-  background: linear-gradient(120deg, #ff4081 0%, #d6336c 55%, #a41f51 100%);
+  background:
+    linear-gradient(135deg, rgba(214, 51, 108, 0.87), rgba(157, 47, 96, 0.84)),
+    var(--button-art) center / cover no-repeat;
   box-shadow: 0 16px 30px rgba(214, 51, 108, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.35);
   color: #fff9fa;
   cursor: pointer;
@@ -542,11 +588,15 @@ button {
 
 .love-button:hover {
   filter: brightness(1.06);
-  box-shadow: 0 20px 38px rgba(154, 44, 88, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 20px 38px rgba(154, 44, 88, 0.42),
+    0 0 0 5px rgba(255, 182, 193, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.45);
   transform: translateY(-2px);
 }
 
 .love-button:active {
+  box-shadow: 0 8px 18px rgba(154, 44, 88, 0.3), inset 0 3px 8px rgba(91, 23, 51, 0.28);
   transform: translateY(1px) scale(0.99);
 }
 
@@ -661,6 +711,15 @@ button {
   }
   to {
     transform: translate3d(28px, -24px, 0) scale(1.08);
+  }
+}
+
+@keyframes sparkle-field {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-36px, 28px, 0);
   }
 }
 
@@ -1477,7 +1536,7 @@ button {
   border: 1px solid rgba(196, 75, 122, 0.13);
   border-radius: 28px;
   background: rgba(255, 255, 255, 0.42);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  box-shadow: 0 16px 36px rgba(91, 23, 51, 0.09), inset 0 1px 0 rgba(255, 255, 255, 0.85);
 }
 
 .score-heart-wrap {
@@ -1586,6 +1645,17 @@ button {
   text-align: center;
 }
 
+.message-panel {
+  position: relative;
+  padding: clamp(18px, 3vw, 26px);
+  border: 1px solid rgba(196, 75, 122, 0.13);
+  border-radius: 26px;
+  background: rgba(255, 255, 255, 0.4);
+  box-shadow: 0 16px 36px rgba(91, 23, 51, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
 .panel-label {
   margin: 0 0 10px;
   color: var(--rose-dark);
@@ -1630,6 +1700,7 @@ button {
   border: 1px solid rgba(255, 64, 129, 0.34);
   border-radius: 22px;
   background: linear-gradient(135deg, rgba(255, 255, 255, 0.68), rgba(255, 230, 238, 0.58));
+  box-shadow: 0 14px 32px rgba(91, 23, 51, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.72);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   animation: quote-glow 5s ease-in-out infinite;
@@ -1709,8 +1780,13 @@ button {
 
 .quote-button:hover {
   background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 8px 18px rgba(214, 51, 108, 0.14);
+  box-shadow: 0 8px 18px rgba(214, 51, 108, 0.18), 0 0 0 3px rgba(255, 182, 193, 0.2);
   transform: translateY(-1px);
+}
+
+.quote-button:active {
+  box-shadow: inset 0 2px 5px rgba(154, 44, 88, 0.16);
+  transform: translateY(1px) scale(0.98);
 }
 
 .quote-button:focus-visible {
@@ -1742,10 +1818,21 @@ button {
 }
 
 .action-button:hover {
+  filter: brightness(1.05);
+  box-shadow: 0 16px 30px rgba(154, 44, 88, 0.2);
   transform: translateY(-2px);
 }
 
+.action-button--primary:hover {
+  box-shadow: 0 18px 34px rgba(214, 51, 108, 0.4), 0 0 0 4px rgba(255, 182, 193, 0.22);
+}
+
+.action-button--secondary:hover {
+  box-shadow: 0 14px 26px rgba(154, 44, 88, 0.16), 0 0 0 3px rgba(255, 182, 193, 0.18);
+}
+
 .action-button:active {
+  box-shadow: 0 6px 14px rgba(154, 44, 88, 0.2), inset 0 2px 6px rgba(91, 23, 51, 0.18);
   transform: translateY(1px) scale(0.99);
 }
 
@@ -1756,7 +1843,9 @@ button {
 
 .action-button--primary {
   border: 0;
-  background: linear-gradient(120deg, #ff4081, #d6336c);
+  background:
+    linear-gradient(135deg, rgba(214, 51, 108, 0.88), rgba(157, 47, 96, 0.82)),
+    var(--button-art) center / cover no-repeat;
   box-shadow: 0 12px 24px rgba(214, 51, 108, 0.27);
   color: #fff9fa;
 }
@@ -1790,8 +1879,15 @@ button {
 }
 
 .utility-button:hover {
-  background: rgba(255, 255, 255, 0.55);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: 0 6px 14px rgba(154, 44, 88, 0.12);
   color: var(--rose-dark);
+}
+
+.utility-button:active {
+  background: rgba(255, 245, 248, 0.9);
+  box-shadow: inset 0 2px 5px rgba(154, 44, 88, 0.14);
+  transform: translateY(1px);
 }
 
 .utility-button:focus-visible {
@@ -1803,6 +1899,76 @@ button {
   color: var(--rose);
   font-family: Georgia, serif;
   font-size: 12px;
+}
+
+.heart-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  will-change: transform;
+}
+
+.heart-cursor.is-visible {
+  opacity: 1;
+}
+
+.heart-cursor span {
+  position: absolute;
+  color: var(--rose);
+  font-family: Georgia, serif;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.95);
+  animation: cursor-heart 1.15s ease-out infinite;
+  pointer-events: none;
+}
+
+.heart-cursor span:nth-child(1) {
+  font-size: 14px;
+  transform: translate(-50%, -50%);
+}
+
+.heart-cursor span:nth-child(2) {
+  color: var(--rose-deep);
+  font-size: 10px;
+  transform: translate(-10%, -150%);
+  animation-delay: -0.38s;
+}
+
+.heart-cursor span:nth-child(3) {
+  font-size: 8px;
+  transform: translate(-160%, -90%);
+  animation-delay: -0.76s;
+}
+
+.heart-cursor.is-pressed span {
+  animation-duration: 0.55s;
+}
+
+@keyframes cursor-heart {
+  0%,
+  100% {
+    opacity: 0.2;
+    filter: brightness(1);
+  }
+  45% {
+    opacity: 0.85;
+    filter: brightness(1.12);
+  }
+}
+
+.couple-names span,
+.dua-names,
+.dua-words,
+.love-message,
+.quote-text {
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .toast {
@@ -2489,5 +2655,10 @@ button {
 
   .ambient-particle {
     opacity: 0.35;
+  }
+
+  .ambient__sparkles,
+  .heart-cursor {
+    display: none;
   }
 }

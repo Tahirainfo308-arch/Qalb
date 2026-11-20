@@ -158,11 +158,13 @@ function formatDisplayName(value) {
 }
 
 function createAmbientParticles() {
+  if (reducedMotionQuery.matches) return;
+
   const container = document.querySelector("[data-particles]");
   const isSmall = window.matchMedia("(max-width: 560px)").matches;
   const counts = isSmall
-    ? { heart: 6, star: 12, sparkle: 6, petal: 5 }
-    : { heart: 11, star: 20, sparkle: 12, petal: 9 };
+    ? { heart: 5, star: 10, sparkle: 5, petal: 4 }
+    : { heart: 9, star: 16, sparkle: 9, petal: 7 };
   const glyphs = {
     heart: ["♥", "♡"],
     star: ["✦", "✧", "✶"],
@@ -548,6 +550,45 @@ async function shareResult() {
   }
 }
 
+function createHeartCursor() {
+  const desktopPointerQuery = window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)");
+  if (reducedMotionQuery.matches || !desktopPointerQuery.matches) return;
+
+  const cursor = document.createElement("div");
+  cursor.className = "heart-cursor";
+  cursor.setAttribute("aria-hidden", "true");
+  cursor.innerHTML = "<span>♥</span><span>♡</span><span>✦</span>";
+  document.body.appendChild(cursor);
+
+  let cursorX = -100;
+  let cursorY = -100;
+  let cursorFrame = 0;
+
+  const renderCursor = () => {
+    cursor.style.transform = `translate3d(${cursorX}px, ${cursorY}px, 0)`;
+    cursorFrame = 0;
+  };
+
+  window.addEventListener(
+    "pointermove",
+    (event) => {
+      cursorX = event.clientX;
+      cursorY = event.clientY;
+      cursor.classList.add("is-visible");
+
+      if (!cursorFrame) {
+        cursorFrame = window.requestAnimationFrame(renderCursor);
+      }
+    },
+    { passive: true }
+  );
+
+  window.addEventListener("pointerdown", () => cursor.classList.add("is-pressed"));
+  window.addEventListener("pointerup", () => cursor.classList.remove("is-pressed"));
+  document.addEventListener("mouseleave", () => cursor.classList.remove("is-visible"));
+  document.addEventListener("mouseenter", () => cursor.classList.add("is-visible"));
+}
+
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -615,3 +656,5 @@ document.addEventListener("keydown", (event) => {
 });
 
 createAmbientParticles();
+createHeartCursor();
+document.documentElement.dataset.qalbReady = "true";
